@@ -1,31 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:task/persistentfooter.dart';
-class login extends StatefulWidget {
-  const login ({super.key});
+class drawer extends StatelessWidget {
+  const drawer({super.key});
 
-  @override
-  State<login> createState() => _State();
-}
-
-class _State extends State<login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('AppBar Demo',style: TextStyle(fontSize: 30,color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold),),
         backgroundColor: Colors.amberAccent,
-        title: Text("welcome",style:TextStyle(fontWeight: FontWeight.bold,color: Colors.pink) ,),
         centerTitle: true,
-        leading: Icon(Icons.arrow_back_ios_new,color: Colors.yellow,),
-        actions: [
-          IconButton(onPressed: () {}, icon:Icon(Icons.home,color: Colors.green,size:30)),
-      ],
+        leading: Builder(
+            builder: (context) => IconButton(
+                 icon: Icon(Icons.menu, color: Colors.lightBlue),
+            onPressed: () {
+    Scaffold.of(context).openDrawer();
+    },
+      ),
     ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder:(context)=>Persistentfooter()));
-      }, child: Icon(Icons.arrow_back_ios_new),),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        actions: [
+          Icon(Icons.search,color: Colors.white,),
+          SizedBox(width: 20,),
+          Icon(Icons.favorite,color: Colors.white,),
+          SizedBox(width: 20,),
+          Icon(Icons.mail,color: Colors.white,),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+        DrawerHeader(decoration: BoxDecoration(
+        color: Colors.blueGrey,
+        ),child: Column(
+        children: [
+          Text('Flutter',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+        ],
+      ),
+      ),
+            ListTile(
+              leading:Icon(Icons.home),
+              trailing: Icon(Icons.arrow_right),
+              title: Text('Home'),
+            ),
+            Divider(),
+            ListTile(
+              leading:Icon(Icons.update),
+              trailing: Icon(Icons.arrow_right),
+              title: Text('Update'),
+            ),
+            Divider(),
+            ListTile(
+              leading:Icon(Icons.offline_pin_rounded),
+              trailing: Icon(Icons.arrow_right),
+              title: Text('Offline'),
+            ),
+            Divider(),
+            ListTile(
+              leading:Icon(Icons.details),
+              trailing: Icon(Icons.arrow_right),
+              title: Text('Details'),
+            ),
+            Divider(),
+          ],
+        ),
+    ),
     );
   }
 }
-
-
